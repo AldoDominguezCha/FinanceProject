@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Summary
+{% endblock %}
+
+{% block main %}
+    <h2>{{user.username}}</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Company name</th>
+          <th scope="col">Stock symbol</th>
+          <th scope="col">Number of shares</th>
+          <th scope="col">Stock price</th>
+          <th scope="col">Total value of the holding</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stock in stocks %}
+            <tr>
+              <th scope="row">{{stock.index}}</th>
+              <td>{{stock.company}}</td>
+              <td>{{stock.symbol}}</td>
+              <td>{{stock.total_shares}}</td>
+              <td>{{stock.price}}</td>
+              <td>{{(stock.price*stock.total_shares) | usd}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h4>Available cash: {{user.cash | usd}}</h4>
+    <h4>Grand total for the account: {{(user.cash + holdings_value) | usd}}</h4>
+{% endblock %}

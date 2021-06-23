@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h2>{{username}}</h2>
+    <h3>Purchases</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Company name</th>
+          <th scope="col">Stock symbol</th>
+          <th scope="col">Number of shares</th>
+          <th scope="col">Purchase stock price</th>
+          <th scope="col">Value of the purchase</th>
+          <th scope="col">Date and time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for buy in buys %}
+            <tr>
+              <th scope="row">{{buy.index}}</th>
+              <td>{{buy.company}}</td>
+              <td>{{buy.symbol}}</td>
+              <td>{{buy.shares}}</td>
+              <td>{{buy.price}}</td>
+              <td>{{(buy.price*buy.shares) | usd}}</td>
+              <td>{{buy.time}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h3>Sells</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Company name</th>
+          <th scope="col">Stock symbol</th>
+          <th scope="col">Number of shares</th>
+          <th scope="col">Sell stock price</th>
+          <th scope="col">Value of the sell</th>
+          <th scope="col">Date and time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for sell in sells %}
+            <tr>
+              <th scope="row">{{sell.index}}</th>
+              <td>{{sell.company}}</td>
+              <td>{{sell.symbol}}</td>
+              <td>{{sell.shares}}</td>
+              <td>{{sell.price}}</td>
+              <td>{{(sell.price*sell.shares) | usd}}</td>
+              <td>{{sell.time}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

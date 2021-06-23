@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+
+    {% if length == 0 %}
+    <h1>You currently don't have any shares you can sell</h1>
+
+    {% else %}
+    <form action="/sell" method="post">
+        <label for="exampleFormControlSelect1">Select the stock you wish to sell</label>
+        <select class="form-control" name="symbol">
+            {% for stock in stocks %}
+                <option value={{stock.symbol}}>{{stock.company}} ({{stock.symbol}})</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="shares" autofocus autocomplete="off" placeholder="Number of shares">
+        <button type="submit">Sell<button>
+    </form>
+
+    {% endif %}
+{% endblock %}
